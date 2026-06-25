@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Episode — StudioCast</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar scrolled">
+  <a href="/" class="nav-logo">
+    <span class="emoji">🎙️</span>
+    <span class="name">Studio<span>Cast</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/#podcasts">Podcasts</a></li>
+    <li><a href="/#about">About</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+  <button class="btn-signin" onclick="location.href='/login'">Sign In</button>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="podcast-detail-page">
+  <div id="podcast-main">
+    <div style="padding:120px 5%;text-align:center;color:var(--text3)">
+      <p style="font-size:2rem;margin-bottom:12px">🎙️</p>
+      <p>Loading episode…</p>
+    </div>
+  </div>
+  <div id="related-section"></div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo" style="margin-bottom:12px">
+        <span class="emoji">🎙️</span>
+        <span class="name">Studio<span>Cast</span></span>
+      </div>
+      <p>A curated podcast platform for deep conversations and stories that matter.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/#podcasts">Podcasts</a></li>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Categories</h4>
+      <ul>
+        <li><a href="/#podcasts">Technology</a></li>
+        <li><a href="/#podcasts">Business</a></li>
+        <li><a href="/#podcasts">Wellness</a></li>
+        <li><a href="/#podcasts">Culture</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Admin</h4>
+      <ul>
+        <li><a href="/login">Sign In</a></li>
+        <li><a href="/dashboard">Dashboard</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 StudioCast. All rights reserved.</span>
+    <span>Built with ❤️ and Node.js</span>
+  </div>
+</footer>
+
+<script src="/js/podcast.js"></script>
+<script>
+// Navbar hamburger
+const hamburger = document.getElementById('hamburger');
+const navLinks  = document.querySelector('.nav-links');
+if (hamburger && navLinks) {
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+    const spans = hamburger.querySelectorAll('span');
+    spans[0].style.transform = navLinks.classList.contains('open') ? 'rotate(45deg) translate(5px,5px)' : '';
+    spans[1].style.opacity   = navLinks.classList.contains('open') ? '0' : '1';
+    spans[2].style.transform = navLinks.classList.contains('open') ? 'rotate(-45deg) translate(5px,-5px)' : '';
+  });
+}
+</script>
+</body>
+</html>

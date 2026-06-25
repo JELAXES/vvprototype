@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — StudioCast</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- Toast -->
+<div id="toast-container"></div>
+
+<!-- Navbar -->
+<nav class="navbar scrolled">
+  <a href="/" class="nav-logo">
+    <span class="emoji">🎙️</span>
+    <span class="name">Studio<span>Cast</span></span>
+  </a>
+  <div style="display:flex;align-items:center;gap:8px">
+    <span style="font-size:0.8rem;color:var(--text3)">Admin</span>
+    <span style="width:8px;height:8px;background:#4ade80;border-radius:50%;display:inline-block"></span>
+  </div>
+</nav>
+
+<div class="dashboard-page">
+  <!-- Header -->
+  <div class="dash-header">
+    <div>
+      <h1 class="dash-title">Admin <span>Dashboard</span></h1>
+      <p style="color:var(--text3);font-size:0.85rem;margin-top:4px">Manage your podcast library</p>
+    </div>
+    <div class="dash-actions">
+      <button class="btn-primary" id="add-podcast-btn" style="border:none">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+        </svg>
+        Add Podcast
+      </button>
+      <a href="/" class="btn-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        View Site
+      </a>
+      <button class="btn-danger" id="logout-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
+          <polyline points="16 17 21 12 16 7"/>
+          <line x1="21" y1="12" x2="9" y2="12"/>
+        </svg>
+        Logout
+      </button>
+    </div>
+  </div>
+
+  <div class="dash-content">
+    <!-- Stats -->
+    <div class="dash-stats">
+      <div class="dash-stat">
+        <div class="dash-stat-icon">🎙️</div>
+        <div class="dash-stat-info">
+          <p>Total Episodes</p>
+          <h3 id="podcast-count">—</h3>
+        </div>
+      </div>
+      <div class="dash-stat">
+        <div class="dash-stat-icon">📂</div>
+        <div class="dash-stat-info">
+          <p>Categories</p>
+          <h3 id="cat-count">—</h3>
+        </div>
+      </div>
+      <div class="dash-stat">
+        <div class="dash-stat-icon">🔒</div>
+        <div class="dash-stat-info">
+          <p>Security</p>
+          <h3 style="font-size:1rem;color:#4ade80">Active</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="dash-table-wrap">
+      <div class="dash-table-header">
+        <h2>All Podcasts</h2>
+      </div>
+      <div style="overflow-x:auto">
+        <table>
+          <thead>
+            <tr>
+              <th>Thumbnail</th>
+              <th>Title</th>
+              <th>Category</th>
+              <th>Duration</th>
+              <th>Date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="podcasts-tbody">
+            <tr>
+              <td colspan="6" style="text-align:center;padding:40px;color:var(--text3)">Loading…</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Podcast Modal -->
+<div class="modal-backdrop" id="add-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Add New Podcast</h2>
+      <button class="modal-close" id="modal-close">✕</button>
+    </div>
+
+    <form class="modal-form" id="add-form" enctype="multipart/form-data">
+      <div class="field">
+        <label>Title *</label>
+        <input type="text" name="title" placeholder="Episode title" required
+               style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 16px;color:var(--text);font-size:0.9rem;font-family:var(--font);outline:none;transition:border-color var(--transition)">
+      </div>
+
+      <div class="field">
+        <label>Description *</label>
+        <textarea name="description" placeholder="What is this episode about?" required rows="3"
+                  style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 16px;color:var(--text);font-size:0.9rem;font-family:var(--font);outline:none;resize:vertical;transition:border-color var(--transition)"></textarea>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div class="field">
+          <label>Category *</label>
+          <select name="category" required
+                  style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 16px;color:var(--text);font-size:0.9rem;font-family:var(--font);outline:none;cursor:pointer">
+            <option value="">Select…</option>
+            <option>Technology</option>
+            <option>Business</option>
+            <option>Wellness</option>
+            <option>Culture</option>
+            <option>Science</option>
+            <option>Education</option>
+            <option>Entertainment</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Duration</label>
+          <input type="text" name="duration" placeholder="e.g. 45:30"
+                 style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 16px;color:var(--text);font-size:0.9rem;font-family:var(--font);outline:none;transition:border-color var(--transition)">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Date</label>
+        <input type="date" name="date"
+               style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 16px;color:var(--text);font-size:0.9rem;font-family:var(--font);outline:none;transition:border-color var(--transition);color-scheme:dark">
+      </div>
+
+      <div class="field">
+        <label>Thumbnail Image</label>
+        <div class="upload-zone" id="thumb-zone">
+          <div class="icon">🖼️</div>
+          <p>Click or drag to upload thumbnail</p>
+          <span>JPG, PNG, WebP — max 10MB</span>
+          <input type="file" id="thumb-input" name="thumbnail" accept="image/*">
+        </div>
+        <div class="upload-preview" id="thumb-preview">
+          <img src="" alt="Preview">
+          <span class="file-name"></span>
+          <span class="remove-file">✕</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Video File</label>
+        <div class="upload-zone" id="video-zone">
+          <div class="icon">🎬</div>
+          <p>Click or drag to upload video</p>
+          <span>MP4, WebM, MOV — max 500MB</span>
+          <input type="file" id="video-input" name="video" accept="video/*">
+        </div>
+        <div class="upload-preview" id="video-preview">
+          <span style="font-size:1.5rem">🎬</span>
+          <span class="file-name"></span>
+          <span class="remove-file">✕</span>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" id="cancel-btn">Cancel</button>
+        <button type="submit" class="btn-save" id="save-btn">Save Podcast</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="/js/dashboard.js"></script>
+<script>
+// Update category count
+fetch('/api/podcasts').then(r=>r.json()).then(data=>{
+  const cats = new Set(data.map(p=>p.category));
+  const el = document.getElementById('cat-count');
+  if(el) el.textContent = cats.size;
+});
+// Style form inputs on focus
+document.querySelectorAll('.modal-form input, .modal-form textarea, .modal-form select').forEach(el=>{
+  el.addEventListener('focus',()=>el.style.borderColor='var(--accent)');
+  el.addEventListener('blur',()=>el.style.borderColor='var(--border)');
+});
+</script>
+</body>
+</html>

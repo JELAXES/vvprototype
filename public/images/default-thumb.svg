@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#16161f"/>
+      <stop offset="100%" style="stop-color:#0a0a0f"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#7c3aed"/>
+      <stop offset="100%" style="stop-color:#a855f7"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <circle cx="400" cy="180" r="80" fill="none" stroke="url(#accent)" stroke-width="3" opacity="0.3"/>
+  <circle cx="400" cy="180" r="55" fill="rgba(124,58,237,0.15)"/>
+  <!-- Mic icon -->
+  <rect x="383" y="140" width="34" height="50" rx="17" fill="url(#accent)" opacity="0.8"/>
+  <path d="M365 180 Q365 210 400 210 Q435 210 435 180" fill="none" stroke="url(#accent)" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+  <line x1="400" y1="210" x2="400" y2="228" stroke="url(#accent)" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+  <line x1="385" y1="228" x2="415" y2="228" stroke="url(#accent)" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+  <!-- Sound waves -->
+  <path d="M330 165 Q320 180 330 195" fill="none" stroke="rgba(168,85,247,0.4)" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M310 155 Q295 180 310 205" fill="none" stroke="rgba(168,85,247,0.25)" stroke-width="2" stroke-linecap="round"/>
+  <path d="M470 165 Q480 180 470 195" fill="none" stroke="rgba(168,85,247,0.4)" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M490 155 Q505 180 490 205" fill="none" stroke="rgba(168,85,247,0.25)" stroke-width="2" stroke-linecap="round"/>
+  <!-- Text -->
+  <text x="400" y="310" text-anchor="middle" font-family="Inter, sans-serif" font-size="22" font-weight="700" fill="rgba(255,255,255,0.6)">StudioCast</text>
+  <text x="400" y="340" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" fill="rgba(255,255,255,0.3)">Podcast Episode</text>
+</svg>

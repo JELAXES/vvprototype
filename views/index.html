@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudioCast — Stories Worth Listening To</title>
+  <meta name="description" content="Watch every episode from our collection of conversations.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- Page Loader -->
+<div id="page-loader">
+  <div class="loader-logo">🎙️ Studio<span>Cast</span></div>
+  <div class="loader-bar"></div>
+</div>
+
+<!-- Toast Container -->
+<div id="toast-container"></div>
+
+<!-- Navbar -->
+<nav class="navbar" id="navbar">
+  <a href="/" class="nav-logo">
+    <span class="emoji">🎙️</span>
+    <span class="name">Studio<span>Cast</span></span>
+  </a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#" class="active">Home</a></li>
+    <li><a href="#podcasts">Podcasts</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="btn-signin" onclick="location.href='/login'">Sign In</button>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-bg-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🎧 Now Streaming</div>
+    <h1 class="hero-title">
+      Stories Worth<br>
+      <span class="gradient-text">Listening To</span>
+    </h1>
+    <p class="hero-subtitle">
+      Watch every episode from our collection of conversations.
+      Thoughtful talk, every time.
+    </p>
+    <div class="hero-cta">
+      <a href="#podcasts" class="btn-primary">▶ Browse Podcasts</a>
+      <a href="#about" class="btn-secondary">Learn More</a>
+    </div>
+
+    <!-- Featured -->
+    <div class="featured-section">
+      <div class="section-label">⭐ Featured Episode</div>
+      <div id="featured-wrap"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Podcasts -->
+<section class="podcasts-section" id="podcasts">
+  <div class="section-header">
+    <div>
+      <div class="section-label">🎙️ All Episodes</div>
+      <h2 class="section-title">Latest <span>Podcasts</span></h2>
+    </div>
+  </div>
+
+  <div class="filter-bar">
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+      </svg>
+      <input type="text" id="search-input" placeholder="Search podcasts…" autocomplete="off">
+    </div>
+    <div class="filter-chips">
+      <button class="chip active" data-cat="All">All</button>
+      <button class="chip" data-cat="Technology">Technology</button>
+      <button class="chip" data-cat="Business">Business</button>
+      <button class="chip" data-cat="Wellness">Wellness</button>
+      <button class="chip" data-cat="Culture">Culture</button>
+      <button class="chip" data-cat="Science">Science</button>
+    </div>
+    <select id="sort-select" class="sort-select">
+      <option value="newest">Newest First</option>
+      <option value="oldest">Oldest First</option>
+    </select>
+  </div>
+
+  <div class="podcast-grid" id="podcast-grid">
+    <div class="no-results">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+      </svg>
+      <h3>Loading podcasts…</h3>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="about-section" id="about">
+  <div class="about-grid">
+    <div>
+      <span class="about-tag">About StudioCast</span>
+      <h2 class="about-title">Where great conversations live</h2>
+      <p class="about-desc">
+        StudioCast is a curated podcast platform built for deep thinkers, curious minds, and passionate listeners.
+        We bring together voices that matter — from technologists and entrepreneurs to scientists and artists —
+        in long-form conversations that go beyond the surface.
+      </p>
+      <div class="stats-row">
+        <div class="stat">
+          <div class="stat-number" id="stat-episodes">—</div>
+          <div class="stat-label">Episodes</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">4+</div>
+          <div class="stat-label">Categories</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">HD</div>
+          <div class="stat-label">Quality</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual">
+      <div class="about-visual-card">
+        <div class="wave-bars" id="wave-bars"></div>
+        <p style="color:var(--text2);font-size:0.88rem;line-height:1.7">
+          "The best podcasts don't just inform — they change how you see the world."
+        </p>
+        <p style="color:var(--accent3);font-size:0.8rem;margin-top:12px;font-weight:600">— StudioCast</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-title">Get in Touch</h2>
+    <p class="contact-sub">Have a story to share or want to collaborate? We'd love to hear from you.</p>
+    <form class="contact-form" onsubmit="handleContact(event)">
+      <div class="form-row">
+        <div class="field">
+          <label>Name</label>
+          <input type="text" placeholder="Your name" required>
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" placeholder="your@email.com" required>
+        </div>
+      </div>
+      <div class="field">
+        <label>Subject</label>
+        <input type="text" placeholder="What's this about?">
+      </div>
+      <div class="field">
+        <label>Message</label>
+        <textarea placeholder="Your message…" required></textarea>
+      </div>
+      <button type="submit" class="btn-submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo" style="margin-bottom:12px">
+        <span class="emoji">🎙️</span>
+        <span class="name">Studio<span>Cast</span></span>
+      </div>
+      <p>A curated podcast platform for deep conversations and stories that matter.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#podcasts">Podcasts</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Categories</h4>
+      <ul>
+        <li><a href="#podcasts">Technology</a></li>
+        <li><a href="#podcasts">Business</a></li>
+        <li><a href="#podcasts">Wellness</a></li>
+        <li><a href="#podcasts">Culture</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Admin</h4>
+      <ul>
+        <li><a href="/login">Sign In</a></li>
+        <li><a href="/dashboard">Dashboard</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 StudioCast. All rights reserved.</span>
+    <span>Built with ❤️ and Node.js</span>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+<script>
+// Build wave bars
+const wb = document.getElementById('wave-bars');
+if (wb) {
+  for (let i=0;i<20;i++) {
+    const b = document.createElement('div');
+    b.className = 'wave-bar';
+    b.style.height = (Math.random()*60+20)+'%';
+    wb.appendChild(b);
+  }
+}
+// Update stat count from API
+fetch('/api/podcasts').then(r=>r.json()).then(d=>{
+  const el = document.getElementById('stat-episodes');
+  if(el) el.textContent = d.length + '+';
+});
+// Contact form
+function handleContact(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.btn-submit');
+  btn.textContent = '✓ Message Sent!';
+  btn.style.background = 'linear-gradient(135deg,#16a34a,#22c55e)';
+  setTimeout(()=>{ e.target.reset(); btn.textContent='Send Message'; btn.style.background=''; },3000);
+}
+</script>
+</body>
+</html>
