@@ -2,7 +2,6 @@ require('dotenv').config();
 
 const express = require('express');
 const session = require('express-session');
-const FileStore = require('session-file-store')(session);
 const bcrypt = require('bcryptjs');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
@@ -20,9 +19,8 @@ const PODCASTS_FILE = path.join(__dirname, 'podcasts.json');
 const UPLOADS_DIR   = path.join(__dirname, 'public', 'uploads');
 const THUMB_DIR     = path.join(UPLOADS_DIR, 'thumbnails');
 const VIDEO_DIR     = path.join(UPLOADS_DIR, 'videos');
-const SESSIONS_DIR  = path.join(__dirname, 'sessions');
 
-[UPLOADS_DIR, THUMB_DIR, VIDEO_DIR, SESSIONS_DIR].forEach(dir => {
+[UPLOADS_DIR, THUMB_DIR, VIDEO_DIR].forEach(dir => {
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 });
 
@@ -62,7 +60,6 @@ const loginLimiter = rateLimit({
 
 // ── Session ────────────────────────────────────────────────────────────────
 app.use(session({
-  store: new FileStore({ path: SESSIONS_DIR, ttl: 86400, reapInterval: 3600 }),
   secret: process.env.SESSION_SECRET || 'fallback-secret-change-me',
   resave: false,
   saveUninitialized: false,
